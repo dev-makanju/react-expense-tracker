@@ -1,0 +1,11 @@
+.expense-date__wrapper{
+   padding: 7px;
+   border-radius: 5px;
+   box-shadow: 0px 2px 5px 7px rgba(0 , 0 , 0 , .1);
+   border: 1px solid #000;
+}
+
+.expense-month__wrapper{
+   color: blue;
+   font-weight: 300;
+}

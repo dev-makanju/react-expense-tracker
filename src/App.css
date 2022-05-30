@@ -2,6 +2,18 @@
   text-align: center;
 }
 
+h1, h2, h3, h4, h5, h6{
+  color: #fff;
+}
+
+p {
+  color: #fff;
+}
+
+ul ,  li , ol {
+  color: #fff ;
+} 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

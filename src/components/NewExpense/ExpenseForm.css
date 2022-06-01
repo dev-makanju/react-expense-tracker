@@ -1,0 +1,28 @@
+.form-control{
+   display: flex;
+   flex-direction: column;
+}
+
+.form-control.input label{
+   padding: .5rem 0px;
+   width: 100%;
+   text-align: left;
+}
+
+.form-control.input input{
+   padding: 7px;
+   border-radius: 3px;
+   width: 100%;
+   box-sizing: border-box;
+   border: none;
+   outline: none;
+}
+
+.form-control__actions button{
+   border: 1px solid #000;
+   border-radius: 3px;
+   padding: 7px;
+   width: 100%;
+   margin: 1.5rem 0px;
+   cursor: pointer;
+}

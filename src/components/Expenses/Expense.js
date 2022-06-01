@@ -1,52 +1,65 @@
+import { useState } from 'react';
+import NewExpense from '../NewExpense/NewExpense';
 import ExpenseItem from '../Expenses/ExpenseItem';
+import ExpenseFilter from './ExpenseFilter';
 import './Expense.css'
 
+const DUMMY_EXPENSES = [
+   { 
+     id:'e1', 
+     title:'Jeans', 
+     price:238, 
+     date: new Date(2020, 3, 4)
+   },
+   { 
+     id:'e2', 
+     title:'Shoes', 
+     price:534, 
+     date: new Date(2021, 2, 4),
+   },
+   { 
+     id:'e3', 
+     title:'Shoes', 
+     price:334, 
+     date: new Date(2022, 3, 5),
+   },
+   { 
+     id:'e4', 
+     title:'Cloth',
+     price:223 , 
+     date: new Date(2022, 5, 6),
+   }
+];
+
 const Expense = () => {
-   const expense = [
-      { 
-        title:'Shoes', 
-        price:238, 
-        date: new Date(2022, 3, 4)
-      },
-      { 
-        title:'Shoes', 
-        price:534, 
-        date: new Date(2022, 2, 4),
-      },
-      { 
-        title:'Shoes', 
-        price:334, 
-        date: new Date(2022, 3, 5),
-      },
-      { 
-        title:'Shoes',
-        price:223 , 
-        date: new Date(2022, 5, 6),
-      }
-   ];
+   const [ expenses , setExpenses] = useState(DUMMY_EXPENSES)
+
+   const [ filteredYear , setFilteredYear ] = useState('2020')
+
+   const newExpenseHandler = (newExpenseData) => {
+      //more cleaner way when its based on updating an older snapshot
+      setExpenses( prevExpenseState => {
+         return [newExpenseData , ...prevExpenseState]
+      })
+
+   }
+
+   const filterChangeHandler = selectedYear => {
+      setFilteredYear(selectedYear)
+   }
 
    return (
       <div className="expense-wrapper-main">
-         <ExpenseItem 
-            title={expense[0].title}
-            price={expense[0].price}
-            date={expense[0].date}
-         />
-         <ExpenseItem 
-               title={expense[1].title}
-               price={expense[1].price}
-               date={expense[1].date}
-         />
-         <ExpenseItem 
-               title={expense[2].title}
-               price={expense[2].price}
-               date={expense[2].date}
-         />
-         <ExpenseItem 
-               title={expense[3].title}
-               price={expense[3].price}
-               date={expense[3].date}
-         />
+         <NewExpense onAddNewExpense={newExpenseHandler} />
+         <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
+         {expenses.map(expense => 
+            <ExpenseItem 
+               key={expense.id}
+               title={expense.title}
+               price={expense.price}
+               date={expense.date}
+            />
+         )}
       </div>
    )
 }

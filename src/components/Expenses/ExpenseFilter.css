@@ -1,0 +1,12 @@
+.expense__filter__control{
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   padding: 7px;
+}
+
+.expense__filter__control select{
+   padding: 7px;
+   border: 1px solid #000;
+   outline: none;
+}

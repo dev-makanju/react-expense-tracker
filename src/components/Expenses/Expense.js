@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import NewExpense from '../NewExpense/NewExpense';
-import ExpenseItem from '../Expenses/ExpenseItem';
 import ExpenseFilter from './ExpenseFilter';
 import './Expense.css'
+import Expenseslist from './ExpensesList';
+import ExpenseChart from './ExpenseChart';
 
 const DUMMY_EXPENSES = [
    { 
@@ -41,25 +42,25 @@ const Expense = () => {
       setExpenses( prevExpenseState => {
          return [newExpenseData , ...prevExpenseState]
       })
-
    }
 
    const filterChangeHandler = selectedYear => {
       setFilteredYear(selectedYear)
    }
 
+   const filteredExpense = expenses.filter(expense => {
+       return expense.date.getFullYear().toString() === filteredYear
+   })         
+
    return (
       <div className="expense-wrapper-main">
+         <ExpenseChart expenses={filteredExpense}/>
          <NewExpense onAddNewExpense={newExpenseHandler} />
-         <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
-         {expenses.map(expense => 
-            <ExpenseItem 
-               key={expense.id}
-               title={expense.title}
-               price={expense.price}
-               date={expense.date}
-            />
-         )}
+         <ExpenseFilter 
+            selected={filteredYear} 
+            onChangeFilter={filterChangeHandler} 
+         />
+         <Expenseslist items={filteredExpense}/>
       </div>
    )
 }
